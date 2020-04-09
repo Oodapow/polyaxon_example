@@ -1,0 +1,46 @@
+---
+version: 1
+
+kind: group
+
+framework: pytorch
+
+environment:
+  resources:
+    gpu:
+      requests: 1
+      limits: 1
+    cpu:
+      requests: 2
+      limits: 2
+
+hptuning:
+  concurrency: 2
+  hyperband:
+      max_iter: 256
+      eta: 2
+      resource:
+          name: epochs
+          type: int
+      metric:
+          name: test_acc
+          optimization: maximize
+      resume: True
+  matrix:
+    learning_rate:
+      values: [10, 1, 0.1]
+    batch_size:
+      values: [1000, 2000, 5000, 10000]
+
+build:
+  image: pytorch/pytorch:1.4-cuda10.1-cudnn7-runtime
+  build_steps:
+    - pip install --no-cache-dir -U polyaxon-client[gcs]==0.6.1
+    - pip install tensorboard
+
+run:
+  cmd: python model.py \
+         --epochs={{ epochs }}
+         --lr={{ learning_rate }} \
+         --batch-size={{ batch_size }} \
+         --test-batch-size={{ batch_size }}

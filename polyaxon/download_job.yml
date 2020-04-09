@@ -1,0 +1,12 @@
+---
+version: 1
+
+kind: job
+
+build:
+    image: pytorch/pytorch:1.4-cuda10.1-cudnn7-runtime
+    build_steps:
+    - pip install --no-cache-dir -U polyaxon-client==0.5.5
+
+run:
+    cmd: python download_data.py
