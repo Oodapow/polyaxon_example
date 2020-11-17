@@ -20,5 +20,7 @@ build:
     - pip install --no-cache-dir -U polyaxon-client[gcs]==0.6.1
     - pip install jupyterlab
     - pip install pytorch-lightning
+    - curl -sL https://deb.nodesource.com/setup_15.x | bash -
+    - apt-get install -y nodejs
     - jupyter labextension install @jupyter-widgets/jupyterlab-manager
     - jupyter nbextension enable --py widgetsnbextension
