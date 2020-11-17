@@ -19,3 +19,6 @@ build:
   build_steps:
     - pip install --no-cache-dir -U polyaxon-client[gcs]==0.6.1
     - pip install jupyterlab
+    - pip install ipywidgets
+    - pip install pytorch-lightning
+    - jupyter nbextension enable --py widgetsnbextension
