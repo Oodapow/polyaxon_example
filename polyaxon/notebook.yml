@@ -5,6 +5,15 @@ kind: notebook
 
 backend: lab
 
+environment:
+  resources:
+    gpu:
+      requests: 1
+      limits: 1
+    cpu:
+      requests: 2
+      limits: 2
+
 build:
   image: pytorch/pytorch:1.4-cuda10.1-cudnn7-runtime
   build_steps:
